@@ -1,0 +1,104 @@
+<!-- <html>
+	<font size="8" color="green">Final test lab</font><br><br>
+	Number of rows: <input type="text" id="t1" /><br><br>
+	Number of cols: <input type="text" id="t2" /><br><br>
+	
+	<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+	
+	<button id="b2" onclick="addColumn()">Add Column</button>
+	
+	<button id="b3" onclick="addRow()">Add Row</button>
+		
+	<script language="javascript">
+		
+		//Your code goes here
+	
+	</script>
+	
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Test Lab</title>
+</head>
+<body>
+
+    <font size="8" color="green">Final test lab</font><br><br>
+    Number of rows: <input type="text" id="t1" /><br><br>
+    Number of cols: <input type="text" id="t2" /><br><br>
+
+    <button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+
+    <button id="b2" onclick="addColumn()">Add Column</button>
+    <button id="b3" onclick="addRow()">Add Row</button>
+
+    <script language="javascript">
+        function generateTable() {
+        	console.log(document.getElementById('t1').value)
+            const rows = document.getElementById('t1').value;
+            const columns = document.getElementById('t2').value;
+
+            // Create a table element
+            if(document.getElementById('t1').value >0 && document.getElementById('t2').value >0){
+            	  const table = document.createElement('table');
+
+            // Create rows and columns in the table
+            for (let i = 0; i < rows; i++) {
+                const row = table.insertRow();
+                for (let j = 0; j < columns; j++) {
+                    const cell = row.insertCell();
+                    cell.textContent = `Row ${i + 1}, Col ${j + 1}`;
+                }
+            }
+
+            // Remove existing content from the screen
+            document.body.innerHTML = '';
+
+            // Append the new table to the body
+            document.body.appendChild(table);
+
+            // Add "Add Column" and "Add Row" buttons
+            const addColumnButton = document.createElement('button');
+            addColumnButton.textContent = 'Add Column';
+            addColumnButton.onclick = addColumn;
+            document.body.appendChild(addColumnButton);
+
+            const addRowButton = document.createElement('button');
+            addRowButton.textContent = 'Add Row';
+            addRowButton.onclick = addRow;
+            document.body.appendChild(addRowButton);
+            }
+          else{
+          	alert('Add rows and column number greater than 0')
+          }
+        }
+
+        function addColumn() {
+            const table = document.querySelector('table');
+            if (table) {
+                const rows = table.rows;
+
+                for (let i = 0; i < rows.length; i++) {
+                    const cell = rows[i].insertCell();
+                    cell.textContent = `Row ${i+1},Col ${rows[i].cells.length}`;
+                }
+            }
+        }
+
+        function addRow() {
+            const table = document.querySelector('table');
+            if (table) {
+                const newRow = table.insertRow();
+                const columns = table.rows[0].cells.length;
+
+                for (let i = 0; i < columns; i++) {
+                    const cell = newRow.insertCell();
+                    cell.textContent = `Row ${table.rows.length}, Col ${i + 1}`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
